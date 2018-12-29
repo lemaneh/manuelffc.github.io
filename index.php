@@ -4,7 +4,7 @@
 </head>
 <body style="background:red;">
 <?php 
-echo "manie";
+echo "manies";
 
 ?>
 </body>
