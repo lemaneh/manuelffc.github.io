@@ -9,57 +9,47 @@
 <title>MANUELF_FC</title>
 <style>
 html{
-background-image: url('images/background.png'); height:100%; width:100%;
+background-image: url('images/backgroundCode.jpeg'); height:100%; width:100%;
 background-repeat:no-repeat;background-size: 100% 100%;
 }
+a{text-decoration:none;}
+
 #mainLogo{width:60vh; left:40vh;}
+
 img{height:75px; width:75px;}
-#mainName{font-weight:300;color:#36B44B;display:inline-block;}
-h4{color:#474A5F; display:inline-block;}
-ul {
-  display:inline-block;
-  float:right;
-  list-style-type: none;
-  overflow: hidden;
-}
 
-li {
-  float: left;
-}
+#mainName{font-weight:300;color:#36B44B;display:block; font-size:2.5vw;text-align:center;}
 
-li a {
-  display: block;
-  margin-left:1vh;
-  margin-right:1vh;
-  text-align: center;
-  text-decoration: none;
-}
+.Link, .noLink{font-size:2.5vw;color:#474A5F; display:inline-block;}
 
-li a.Link h4:hover {
+ul { display:block; list-style-type: none; overflow: hidden; width:100%;}
+
+ul li{display:inline;}
+
+li a { text-align: center; width:32%; margin:auto; text-decoration: none;}
+
+li a.Link:hover{
   color:white;
-  font-weight:700;	
+  font-weight:500;	
+  text-decoration:none;
 }
+li a.noLink:hover{
+  color:#474A5F;	
+}
+li a:hover{ background:#474A5F;	border-radius:10px;}
+
 img{height:40px; width:40px;}
 </style>
 </head>
 <body>
 
-<div style="border-bottom:solid; border-color:#474A5F;border-width:.5px;background-color:black; padding:1vh;">
-  <div class="container-fluid" >
-    <div class="navbar-header">
-        <h4 id="mainName"> /* Manuel FC */</h4>
+<div  style="border-bottom:solid; border-color:#474A5F;border-width:.5px;background:black;">
+    <span id="mainName"> /* Manuel F Flores Cacho */</span>
 		<ul>
-			<li><a class="noLink"href=""><h4>{</h4></a></li>
-			<li><a class="Link" href=""><h4 >Education</h4></a></li>
-			<li><a class="noLink"><h4>, </h4></a></li>
-			<li><a class="Link"href=""><h4>Experience</h4></a></li>
-			<li><a class="noLink"><h4>, </h4></a></li>
-			<li><a class="Link"href=""><h4>Skills</h4></a></li>
-			<li><a class="noLink"href=""><h4>}</h4></a></li>
-		</ul>
-      </a>
-    </div>
-  </div>
+			<li><a class="Link" href="">[Education]</a></li>
+			<li><a class="Link"href="">[Experience]</a></li>
+			<li><a class="Link"href="">[Coding]</a></li>
+		</ul> 	
 </div>
     
 <div style="position:fixed; bottom:0px; left:0px; padding:5px; margin:0px; height:70px;">
