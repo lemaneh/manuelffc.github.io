@@ -35,7 +35,7 @@
             width: 75px;
         }
 
-        #pageIntro {
+        #mainName {
             font-weight: 400;
             color: ivory;
             display: block;
@@ -105,7 +105,7 @@
 <body>
 
     <div id="pageIntro"></div>
-    <div style="border-bottom:solid; border-color:#474A5F;border-width:.5px;background:black; padding:0px; margin:0px;">
+    <div style="border-bottom:solid; border-color:#474A5F;border-width:.5px;background:black; padding:0px; maegin:0px;">
         <ol>
             <li id="#mainNavigation"><a class="Link" href="">[Education]</a></li>
             <li id="#mainNavigation"><a class="Link" href="">[Experience]</a></li>
@@ -140,112 +140,83 @@
         </span>
 
 
+
+
+
+        <script type="text/babel">
+            class nameIntro extends React.Component {
+            render(){
+            return(
+            <div className="pageIntro-content">
+                <h1>Hello My Name is Manuel. Welcome</h1>
+                <p>Random number: { Math.random() * 10 }</p>
+            </div>
+            )
+            }
+            }
+            ReactDOM.render(<nameIntro />, document.getElementById('app'));
+        </script>
+
+
         <script>
-			
-            var textType = /text.*/;
-            var placeOutput = document.getElementById('placeOutput');
-            var placeFile = document.getElementById('placeFile');
-            var stringArray = [];
-            var tempLineArray = [];
-            var tempArray = [];
-			var read = new FileReader();
-			
             var openFile = function (event) {
-				clearPlaceOutput();
-				var input = event.target;
-				var file = input.files[0];
-                
-                if (file.type.match(textType)) {	
-					read.readAsText(file);					
-                    read.onload = function (e) { 
-						onLoadDocument(); 
-					}
+                var input = event.target;
+                var file = input.files[0];
+                var textType = /text.*/;
+                var outputResponse = document.getElementById('outputResponse');
+                var placeFile = document.getElementById('placeFile');
+                var stringArray = [];
+                var tempLineArray = [];
+                var tempArray = [];
+                var temp = "";
+                if (file.type.match(textType)) {
+                    var read = new FileReader();
+
+                    read.onload = function (e) {
+                        // By lines
+                        placeFile.innerHTML = read.result;
+                        console.log(read.result)
+                        var lines = read.result.split('\n');
+                        for (var line = 0; line < lines.length; line++) {
+                            tempLine = lines[line].trim().split(" ");
+                            for (var index = 0; index < tempLine.length; index++) {
+                                if (index == 0)
+                                    tempArray = tempLine;
+                                else
+                                    tempArray = tempLineArray;
+                                tempLineArray = [];
+                                stringArray.push(tempArray.join(' '));
+                                for (var i = 1; i < tempArray.length; i++) {
+                                    tempLineArray.push(tempArray[i]);
+                                }
+                                tempLineArray.push(tempArray[0]);
+                                tempArray = [];
+                            }
+                        }
+                        var tempSortedArray = stringArray.sort((a, b) => a.localeCompare(b));;
+                        var outputString = tempSortedArray.join(',@@&&^^++==,');
+                        outputString = outputString.split(',@@&&^^++==,');
+
+                        var element;
+                        var textnode;
+
+                        for (var i = 0; i < outputString.length; i++) {
+                            console.log(outputString[i]);
+                            element = document.createElement("LI");
+                            textnode = document.createTextNode(outputString[i]);
+                            element.appendChild(textnode);
+                            document.getElementById("placeOutput").appendChild(element);
+                        }
+                    }
+                    read.readAsText(input.files[0]);
                 }
-                else 
-                    placeOutput.innerText = "Only Text Files for this version";
+                else {
+                    outputFile.innerText = "Only Text Files for this version";
+                }
             };
-			
-			function onLoadDocument(){
-				// By lines
-                placeFile.innerHTML = read.result;
-                console.log(read.result);
-                var lines = read.result.split('\n');
-				startRotationProcess(lines);
-			}
-			function startRotationProcess(lines){
-				for (var line = 0; line < lines.length; line++) {
-					tempLine = lines[line].trim().split(" ");
-					for (var index = 0; index < tempLine.length; index++) {
-						if (index == 0)
-							tempArray = tempLine;
-						else
-							tempArray = tempLineArray;
-							
-						tempLineArray = [];
-						stringArray.push(tempArray.join(' '));
-						
-						for (var i = 1; i < tempArray.length; i++)
-							tempLineArray.push(tempArray[i]);
-							
-						tempLineArray.push(tempArray[0]);
-						tempArray = [];
-					}
-				}
-                setOutputResponse();
-			}
-			function setOutputResponse(){
-				var tempSortedArray = stringArray.sort((a, b) => a.localeCompare(b));;
-                var outputString = tempSortedArray.join(',@@&&^^++==,');
-                outputString = outputString.split(',@@&&^^++==,');
-                outputResponse(outputString);
-			
-			}
-			function clearPlaceOutput(){
-				document.getElementById("placeOutput").innerHTML = "";;
-				stringArray = [];
-			}
-			function outputResponse(outputString){
-				var element;
-                var textnode;
-			
-				for (var i = 0; i < outputString.length; i++) {
-                    console.log(outputString[i]);
-                    element = document.createElement("LI");
-                    textnode = document.createTextNode(outputString[i]);
-                    element.appendChild(textnode);
-                    document.getElementById("placeOutput").appendChild(element);
-                }
-			}
-			
         </script>
     </div>
 
-    <script type="text/babel">
-        class App extends React.Component {
-			state = {
-				introTextSample:'Hello My Name is Manuel. Welcome',
-				introTextDisplay: 'h',
-				name: 'Manuel',
-				age: 27,
-				education:'M.S. almost completed'
-			}
-			changeText = (e) => {
-			
-				this.setState({name:e.target.value})
-				console.log(this.state);
-			
-			}
-			render(){
-				return(
-				<div className="pageIntro-content">
-					<h1>{this.state.introTextSample}</h1>
-				</div>
-				)
-			}
-        }
-        ReactDOM.render(
-        <App />, document.getElementById('pageIntro'));
-    </script>
 </body>
 
 </html>
